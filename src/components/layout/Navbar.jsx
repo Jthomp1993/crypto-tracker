@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { FaDonate } from "react-icons/fa";
+import { FaDonate, FaUserCircle } from "react-icons/fa";
 
 const pages = ['Exchanges'];
 const settings = ['Profile', 'Account', 'Logout'];
@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar sx={{ mb: 5, backgroundColor: '#2B3A67' }} position="static">
+    <AppBar sx={{ mb: 5, backgroundColor: '#161e36' }} position="static">
         <Container maxWidth="xl">
             <Toolbar disableGutters>
             <Typography
@@ -46,7 +46,7 @@ const Navbar = () => {
                 component="div"
                 sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
-            <Link to='/' style={{ textDecoration: 'none', color: '#fff' }}>
+            <Link to='/' style={{ textDecoration: 'none', color: '#0d96d6' }}>
                 <span><FaDonate /> CRYPTO TRACKER</span>
             </Link>
             </Typography>
@@ -94,7 +94,7 @@ const Navbar = () => {
                 noWrap
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                <Link to='/' style={{ textDecoration: 'none', color: '#fff' }}>
+                <Link to='/' style={{ textDecoration: 'none', color: '#0d96d6' }}>
                     <span><FaDonate /> CRYPTO TRACKER</span>
                 </Link>
             </Typography>
@@ -102,7 +102,7 @@ const Navbar = () => {
                 <Link to='/exchanges' style={{ textDecoration: 'none' }}>
                     <Button
                         onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}>
+                        sx={{ my: 2, color: '#0d96d6', display: 'block' }}>
                         Exchange
                     </Button>
                 </Link>
@@ -111,7 +111,8 @@ const Navbar = () => {
             <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/*<Avatar  src="/broken-image.jpg" />*/}
+                <FaUserCircle style={{ color: '#0d96d6' }} />
                 </IconButton>
                 </Tooltip>
                 <Menu

@@ -1,7 +1,9 @@
+import Container from '@mui/material/Container';
+
 function Exchanges() {
     return (
         <div>
-            Exchange
+            Exchanges
         </div>
     )
 }
