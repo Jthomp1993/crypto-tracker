@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
@@ -9,6 +9,8 @@ import Item from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@mui/material/Button';
+
+import SnackbarContext from '../context/SnackbarContext';
 
 function SignUp() {
     const [nameInvalid, setNameInvalid] = useState(false);
@@ -23,6 +25,7 @@ function SignUp() {
         password: '',    });
 
     const { name, email, password } = formData;
+    const { setSnackbar } = useContext(SnackbarContext);
 
     const useStyles = makeStyles({
         root: {
@@ -57,7 +60,7 @@ function SignUp() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        var nameRe = /^[a-zA-Z]{3,}$/;
+        var nameRe = /^[a-zA-Z ]{1,}$/;
         var testName = nameRe.test(formData.name);
         if(testName === false) {
             setNameInvalid(true);
@@ -108,8 +111,9 @@ function SignUp() {
                 await setDoc(doc(db, 'users', user.uid), formDataCopy);
                 
                 navigate('/');
+                setSnackbar(true, 'success', 'Your account has been created.');
             } catch (error) {
-                console.log('Error');
+                setSnackbar(true, 'error', 'Sorry there has been a problem.');
             }
         }
 
@@ -132,7 +136,7 @@ function SignUp() {
                             <TextField onChange={onChange} required error={passwordInvalid} helperText={passwordErrorText} className={classes.root} sx={{  input: {color: 'white'}, mb: '1rem' }} id="password" type="password" label="Password" variant="outlined" autoComplete="off" />
                         </Item>
                         <Item>
-                            <Button type='submit' sx={{ mt: '1rem', mx: '1rem', display: 'block', backgroundColor: '#13cf81' }} variant="contained">Sign In</Button>
+                            <Button type='submit' sx={{ mt: '1rem', mx: '1rem', display: 'block', backgroundColor: '#13cf81' }} variant="contained">Sign Up</Button>
                         </Item>
                         <Item>
                             <Link style={{ color: '#fff'}} to="/account">
