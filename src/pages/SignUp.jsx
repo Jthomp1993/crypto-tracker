@@ -1,17 +1,20 @@
-import { useState, Fragment, useContext } from 'react';
+import { useState, Fragment } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged  } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase.config';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Item from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import Button from '@mui/material/Button';
-import SnackbarContext from '../context/SnackbarContext';
 
-function Account() {
+function SignUp() {
+    const [nameInvalid, setNameInvalid] = useState(false);
     const [emailInvalid, setEmailInvalid] = useState(false);
     const [passwordInvalid, setPasswordInvalid] = useState(false);
+    const [nameErrorText, setNameErrorText] = useState(null);
     const [emailErrorText, setEmailErrorText] = useState(null);
     const [passwordErrorText, setPasswordErrorText] = useState(null);
     const [formData, setFormData] = useState({
@@ -19,8 +22,7 @@ function Account() {
         email: '',
         password: '',    });
 
-    const { email, password } = formData;
-    const { setSnackbar } = useContext(SnackbarContext);
+    const { name, email, password } = formData;
 
     const useStyles = makeStyles({
         root: {
@@ -53,19 +55,17 @@ function Account() {
         }))
     }
 
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-    if (user) {
-    const uid = user.uid;
-        console.log(`user is signed in with the id ${uid}`);
-    // ...
-    } else {
-        console.log('user is signed out @@@');
-    }
-    });
-
     const onSubmit = async (e) => {
         e.preventDefault();
+        var nameRe = /^[a-zA-Z]{3,}$/;
+        var testName = nameRe.test(formData.name);
+        if(testName === false) {
+            setNameInvalid(true);
+            setNameErrorText('Please enter your name.');
+        } else {
+            setNameInvalid(false);
+            setNameErrorText(null);
+        }
         var emailRe = /\S+@\S+\.\S+/;
         var testEmail = emailRe.test(formData.email);
         if(testEmail === false) {
@@ -86,16 +86,28 @@ function Account() {
             setPasswordErrorText(null);
         }
 
-        if(testEmail && testPassword) {
+        if(testEmail && testPassword && testName) {
             try {
                 const auth = getAuth();
     
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const userCredential = await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                )
     
-                if(userCredential.user) {
-                    navigate('/');
-                    setSnackbar(true, 'success', 'Your are now signed in.');
-                }
+                const user = userCredential.user;
+    
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                });
+    
+                const formDataCopy = {...formData}
+                delete formDataCopy.password
+                formDataCopy.timestamp = serverTimestamp();
+                await setDoc(doc(db, 'users', user.uid), formDataCopy);
+                
+                navigate('/');
             } catch (error) {
                 console.log('Error');
             }
@@ -111,6 +123,9 @@ function Account() {
                 <Grid container direction="column" justifyContent="center" alignItems="center">
                     <Grid item xs={12}>
                         <Item>
+                            <TextField error={nameInvalid} helperText={nameErrorText} onChange={onChange} required className={classes.root} sx={{  input: {color: 'white'}, mb: '1rem' }} id="name" type="name" label="Name" variant="outlined"  />
+                        </Item>
+                        <Item>
                             <TextField error={emailInvalid} helperText={emailErrorText} onChange={onChange} required className={classes.root} sx={{  input: {color: 'white'}, mb: '1rem' }} id="email" type="email" label="Email" variant="outlined"  />
                         </Item>
                         <Item>
@@ -120,8 +135,8 @@ function Account() {
                             <Button type='submit' sx={{ mt: '1rem', mx: '1rem', display: 'block', backgroundColor: '#13cf81' }} variant="contained">Sign In</Button>
                         </Item>
                         <Item>
-                            <Link style={{ color: '#fff'}} to="/sign-up">
-                                <p>Don't have an account? Sign up instead</p>
+                            <Link style={{ color: '#fff'}} to="/account">
+                                <p>Already have an account? Sign in instead</p>
                             </Link>
                         </Item>
                     </Grid>
@@ -131,4 +146,4 @@ function Account() {
     )
 }
 
-export default Account
+export default SignUp

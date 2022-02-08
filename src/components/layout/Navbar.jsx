@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,6 +14,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { FaDonate, FaUserCircle } from "react-icons/fa";
+import { getAuth, updateProfile } from 'firebase/auth';
+import SnackbarContext from '../../context/SnackbarContext';
 
 const pages = ['Exchanges'];
 const settings = ['Profile', 'Account', 'Logout'];
@@ -20,6 +23,10 @@ const settings = ['Profile', 'Account', 'Logout'];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const { setSnackbar } = useContext(SnackbarContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +42,12 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    auth.signOut();
+    navigate('/account');
+    setSnackbar(true, 'success', 'Your are now signed out.');
+  }
 
   return (
     <AppBar sx={{ mb: 5, backgroundColor: '#161e36' }} position="static">
@@ -142,7 +155,7 @@ const Navbar = () => {
                     </Link>
                 </MenuItem>
                 <MenuItem>
-                    <Link to='/' style={{ textDecoration: 'none', color: '#000' }}>
+                    <Link onClick={handleLogout} to='/account' style={{ textDecoration: 'none', color: '#000' }}>
                         <Typography textAlign="center">Logout</Typography>
                     </Link>
                 </MenuItem>
