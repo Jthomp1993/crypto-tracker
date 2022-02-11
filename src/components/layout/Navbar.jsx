@@ -59,7 +59,7 @@ const Navbar = () => {
                 component="div"
                 sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
             >
-            <Link to='/' style={{ textDecoration: 'none', color: '#0d96d6' }}>
+            <Link to='/' style={{ textDecoration: 'none', color: '#fff' }}>
                 <span><FaDonate /> CRYPTO TRACKER</span>
             </Link>
             </Typography>
@@ -115,7 +115,7 @@ const Navbar = () => {
                 <Link to='/exchanges' style={{ textDecoration: 'none' }}>
                     <Button
                         onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: '#0d96d6', display: 'block' }}>
+                        sx={{ my: 2, color: '#fff', display: 'block' }}>
                         Exchange
                     </Button>
                 </Link>
@@ -125,7 +125,7 @@ const Navbar = () => {
                 <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {/*<Avatar  src="/broken-image.jpg" />*/}
-                <FaUserCircle style={{ color: '#0d96d6' }} />
+                <FaUserCircle style={{ color: '#fff' }} />
                 </IconButton>
                 </Tooltip>
                 <Menu

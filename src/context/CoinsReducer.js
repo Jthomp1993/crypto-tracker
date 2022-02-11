@@ -4,7 +4,7 @@ const coinsReducer = (state, action) => {
             return {
                 ...state,
                 coins: action.payload.coins,
-                trending: action.payload.trending
+                trending: action.payload.trending.coins
             }
         default:
             return state

@@ -108,7 +108,7 @@ function Account() {
         <Fragment>
             <Box component='form' onSubmit={onSubmit} sx={{ '& .MuiTextField-root': { m: 1, width: { xs: '30ch', sm: '40ch'} } }}
                 noValidate autoComplete="off">
-                <Grid container direction="column" justifyContent="center" alignItems="center">
+                <Grid container direction="column" columnSpacing={1} justifyContent="center" alignItems="center">
                     <Grid item xs={12}>
                         <Item>
                             <TextField error={emailInvalid} helperText={emailErrorText} onChange={onChange} required className={classes.root} sx={{  input: {color: 'white'}, mb: '1rem' }} id="email" type="email" label="Email" variant="outlined"  />
@@ -117,7 +117,7 @@ function Account() {
                             <TextField onChange={onChange} required error={passwordInvalid} helperText={passwordErrorText} className={classes.root} sx={{  input: {color: 'white'}, mb: '1rem' }} id="password" type="password" label="Password" variant="outlined" autoComplete="off" />
                         </Item>
                         <Item>
-                            <Button type='submit' sx={{ mt: '1rem', mx: '1rem', display: 'block', backgroundColor: '#13cf81' }} variant="contained">Sign In</Button>
+                            <Button type='submit' sx={{ mt: '1rem', mx: '1rem', backgroundColor: '#13cf81', float: 'right' }} variant="contained">Sign In</Button>
                         </Item>
                         <Item>
                             <Link style={{ color: '#fff'}} to="/sign-up">
