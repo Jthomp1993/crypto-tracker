@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import CoinsContext from '../context/CoinsContext';
 import TrendingList from '../components/trending/TrendingList';
+import MarketList from '../components/market/MarketList';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -31,6 +32,7 @@ function Home() {
     return (
         <Fragment>
             <TrendingList trending={trending} />
+            <MarketList coins={coins} />
         </Fragment>
         
     )

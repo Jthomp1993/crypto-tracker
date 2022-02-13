@@ -12,15 +12,14 @@ const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#031730',
     display: 'inline-block',
     boxShadow: 'none'
-    
   }));
 
 function trendingList({ trending }) {
     return (
         <Fragment>
             <Container maxWidth="lg">
-                <h2 style={{ fontSize: '2.5rem', color: '#fff', marginBottom: '1rem' }}>Trending</h2>
-                <Grid style={{ backgroundColor: '#031730', borderRadius: '5px', paddingLeft: '10px', paddingRight: '10px'}} container direction='row' justifyContent='space-between' alignItems='center'>
+                <h2 style={{ fontSize: '2.5rem', color: '#fff' }}>Trending</h2>
+                <Grid style={{ backgroundColor: '#031730', marginBottom: '10px', borderRadius: '5px', paddingLeft: '10px', paddingRight: '10px'}} container direction='row' justifyContent='space-between' alignItems='center'>
                 <Grid item xs={4}>
                     <Item>
                         

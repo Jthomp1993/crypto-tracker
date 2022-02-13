@@ -7,7 +7,6 @@ const CoinsContext = createContext();
 export const CoinsProvider = ({ children }) => {
     const initialState = {
         coins: [],
-        coin:  {},
         trending: [],
         loading: false,
     }
@@ -27,7 +26,7 @@ export const CoinsProvider = ({ children }) => {
     // GET TRENDING COINS
     const getCoinsAndTrending = async () => {
         const [coins, trending] = await Promise.all([
-            coinGecko.get(`/coins/markets?vs_currency=GBP&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`),
+            coinGecko.get(`/coins/markets?vs_currency=GBP&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h`),
             coinGecko.get(`/search/trending`)
         ])
 
