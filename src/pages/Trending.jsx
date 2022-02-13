@@ -1,18 +1,21 @@
 import { Fragment, useEffect, useContext } from 'react';
 import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 import CoinsContext from '../context/CoinsContext';
-import MarketList from '../components/market/MarketList';
+import TrendingList from '../components/trending/TrendingList';
 
 const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-}));
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    color: theme.palette.text.secondary,
+  }));
 
+function Trending() {
+    const { trending, dispatch, getCoinsAndTrending } = useContext(CoinsContext);
 
-function Home() {
-    const { coins, dispatch, getCoinsAndTrending } = useContext(CoinsContext);
 
     useEffect(() => {
         const getCoinData = async () => {
@@ -22,13 +25,11 @@ function Home() {
 
         getCoinData();
     }, [dispatch])
-
     return (
         <Fragment>
-            <MarketList coins={coins} />
+            <TrendingList trending={trending} />
         </Fragment>
-        
     )
 }
 
-export default Home
+export default Trending

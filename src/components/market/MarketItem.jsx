@@ -11,7 +11,7 @@ function MarketItem({ coin }) {
     const Item = styled(Paper)(({ theme }) => ({
     
         padding: theme.spacing(1),
-        backgroundColor: !isShown ? '#10325c' : '#184781',
+        backgroundColor: !isShown ? '#0d2849' : '#133b6b',
         display: 'inline-block',
         boxShadow: 'none',
         
@@ -49,7 +49,7 @@ function MarketItem({ coin }) {
         <Fragment>
             {/* MARKET ITEMS FOR LARGE AND XL SCREEN SIZES */}
             <Box sx={{ display: { xs: 'none', lg: 'block', xl: 'block' }}}>
-            <Grid onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ backgroundColor: !isShown ? '#10325c' : '#184781', marginBottom: '10px', borderRadius: '5px', paddingLeft: '10px', paddingRight: '10px'}} container direction='row' justifyContent='space-between' alignItems='center'>
+            <Grid onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ backgroundColor: !isShown ? '#0d2849' : '#133b6b', marginBottom: '10px', borderRadius: '5px', paddingLeft: '10px', paddingRight: '10px'}} container direction='row' justifyContent='space-between' alignItems='center'>
                 <Grid item xs={2}>
                     <Item>
                         <img style={{ width: '1.5rem'}} src={image} alt="" />
@@ -90,8 +90,8 @@ function MarketItem({ coin }) {
 
             {/* MARKET ITEMS FOR XS SM AND MD SCREEN SIZES */}
             <Box sx={{ display: { xs: 'block', sm: 'block', md: 'block', lg: 'none', xl: 'none' }}}>
-            <Grid onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ backgroundColor: !isShown ? '#10325c' : '#184781', marginBottom: '10px', borderRadius: '5px', paddingLeft: '10px', paddingRight: '10px'}} container direction='row' justifyContent='space-between' alignItems='center'>
-                <Grid item xs={4}>
+            <Grid onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ backgroundColor: !isShown ? '#0d2849' : '#133b6b', marginBottom: '10px', borderRadius: '5px', paddingLeft: '10px', paddingRight: '10px'}} container direction='row' justifyContent='space-between' alignItems='center'>
+                <Grid item xs={6}>
                     <Item>
                         <img style={{ width: '1.5rem'}} src={image} alt="" />
                     </Item>

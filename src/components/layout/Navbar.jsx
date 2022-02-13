@@ -17,7 +17,7 @@ import { FaDonate, FaUserCircle } from "react-icons/fa";
 import { getAuth, updateProfile } from 'firebase/auth';
 import SnackbarContext from '../../context/SnackbarContext';
 
-const pages = ['Exchanges'];
+const pages = ['Exchanges', 'Trending'];
 const settings = ['Profile', 'Account', 'Logout'];
 
 const Navbar = () => {
@@ -117,6 +117,13 @@ const Navbar = () => {
                         onClick={handleCloseNavMenu}
                         sx={{ my: 2, color: '#fff', display: 'block' }}>
                         Exchange
+                    </Button>
+                </Link>
+                <Link to='/trending' style={{ textDecoration: 'none' }}>
+                    <Button
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: '#fff', display: 'block' }}>
+                        Trending
                     </Button>
                 </Link>
             </Box>

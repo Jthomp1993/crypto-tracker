@@ -6,6 +6,7 @@ import Profile from './pages/Profile';
 import Account from './pages/Account';
 import SignUp from './pages/SignUp';
 import Exchanges from './pages/Exchanges';
+import Trending from './pages/Trending';
 import Navbar from './components/layout/Navbar';
 import SnackbarComponent from './components/layout/SnackbarComponent';
 
@@ -22,6 +23,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/exchanges' element={<Exchanges />} />
+                    <Route path='/trending' element={<Trending />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/account' element={<Account />} />
                     <Route path='/sign-up' element={<SignUp />} />
