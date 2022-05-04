@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+This project is unfinished but you can view it [here](https://crypto-tracker-theta-rouge.vercel.app/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
